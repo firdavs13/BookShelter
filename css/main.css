@@ -1,0 +1,129 @@
+/* FONTS */
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/rubik-v18-latin-500.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('../fonts/rubik-v18-latin-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/rubik-v18-latin-500.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/rubik-v18-latin-500.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/rubik-v18-latin-500.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/rubik-v18-latin-500.svg#Rubik') format('svg'); /* Legacy iOS */
+  }
+
+  @font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/rubik-v18-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('../fonts/rubik-v18-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/rubik-v18-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/rubik-v18-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/rubik-v18-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/rubik-v18-latin-regular.svg#Rubik') format('svg'); /* Legacy iOS */
+  }
+
+/* GENERAL CODES */
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.container {
+    width: 100%;
+    max-width: 1194px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+/* SITE CODES */
+
+/* LOGIN CODES */
+
+.login__main {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/Login.jpg");
+    display: flex;
+    align-items: center;
+}
+
+.login__form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.login__form {
+    width: 300px;
+}
+
+.login__form-logo {
+    margin-bottom: 50px;
+    width: 266px;
+    height: 44px;
+}
+
+.login__form-input {
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF !important;
+}
+
+.login__form-input::placeholder {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.login__form-span {
+    border-right: none;
+    padding: 10px;
+}
+
+.login__form-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #0D75FF;
+    padding: 13px;
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+.login__form-text {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+}
