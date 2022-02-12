@@ -205,6 +205,7 @@ img {
     font-size: 14px;
     line-height: 17px;
     color: #222531;
+    margin-left: 360px;
 }
 
 .books__header-bottom {
@@ -225,4 +226,141 @@ img {
 
 .books__order-btn-img {
     margin-right: 10px ;
+}
+
+
+
+
+
+.books__main-bottom-wrap {
+    display: flex;
+}
+
+.main__left {
+    width: 270px;
+    padding: 25px;
+    border: 1px solid #00000026;
+    border-top: none;
+}
+
+.main__left-heading {
+    padding: 0px;
+    margin: 0px;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.main__left-decs {
+    padding: 0px;
+    margin: 0px 0px 25px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 155.6%;
+    color: #000000;
+}
+
+
+.bookmark__list {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+
+.bookmark__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 218px;
+    background: #F8FAFD;
+    padding: 15px;
+    margin-bottom: 15px ;
+    border-radius: 4px;
+}
+
+.bookmark__item-heading {
+    padding: 0px;
+    margin: 0px 0px 8px;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 19px;
+    color: #000000;
+}
+
+.bookmark__item-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bookmark__item-desc {
+    padding: 0px;
+    margin: 0px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    color: #757881;
+}
+
+.bookmark__item-btns {
+    display: flex;
+}
+
+.bookmark__read-btn {
+    margin-right: 10px;
+}
+
+.main__right {
+    width: 100%;
+    background-color: #E5E5E5;
+    padding: 25px;
+}
+
+.main__card {
+    width: 250px;
+}
+
+.card__btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.btn__bookmark {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.btn__more {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.card__header {
+    padding: 13px 15px 0px 15px;
+    border-radius: 5px;
+}
+
+.card__img {
+    border: 15px solid #F8FAFD;
+}
+
+.card__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin: -11px;
+}
+
+.card__item {
+    margin: 11px;
 }
