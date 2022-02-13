@@ -1,5 +1,6 @@
 "use strict";
 
+// VARIABLES ////////////////////////////////////////
 let btnLogout = document.querySelector(".book__logout-btn");
 let localToken = window.localStorage.getItem("token");
 let searchInput = document.querySelector(".search__input");
@@ -10,40 +11,42 @@ let orderBtn = document.querySelector(".books__order-btn");
 let pagenationList = document.querySelector(".pagenation__list");
 const elPrevBtn = document.querySelector(".prev__btn");
 const elNextBtn = document.querySelector(".next__btn");
+let pagenationListWrap = document.querySelector(".pagenation__list-wrap");
 let searchInputValue;
 let indexNum;
 let mainArr;
 
+// Login Page Code  /////////////////////////////////
 if (!localToken) {
   window.location.replace("login.html");
 }
 
+// Logout Button Task
 btnLogout.addEventListener("click", function () {
   window.localStorage.removeItem("token");
   window.location.replace("login.html");
 });
 
-// BOOKMARK
-
+// BOOKMARK BUTTON  //////////////////////////////////
 const renderBookmarks = function (arr, element) {
   arr.forEach((item) => {
+    // Create Element With Bookmark Item
     let htmlBookmark = `
     <li class="bookmark__item">
-    <div class="bookmark__item-text">
+      <div class="bookmark__item-text">
         <h5 class="bookmark__item-heading">${item.volumeInfo?.title}</h5>
         <p class="bookmark__item-desc">${item.volumeInfo?.authors}</p>
-    </div>
-    <div class="bookmark__item-btns">
+      </div>
+      <div class="bookmark__item-btns">
         <a class="bookmark__read-btn" target="_blank" href="${item.volumeInfo?.previewLink}">
-            <img src="./images/bookmark-read.svg" alt="" width="24" height="24">
+          <img src="./images/bookmark-read.svg" alt="" width="24" height="24">
         </a>
         <button  class="bookmark__delete-btn">
-         <img src="./images/bookmark-delete.svg" data--data-bookmark="${item.id}" class="bookmark__delete-btn-img" alt="" width="24" height="24">
+          <img src="./images/bookmark-delete.svg" data--data-bookmark="${item.id}" class="bookmark__delete-btn-img" alt="" width="24" height="24">
         </button>
-    </div>
+      </div>
     </li>
     `;
-
     element.insertAdjacentHTML("beforeend", htmlBookmark);
   });
 };
@@ -68,8 +71,7 @@ cardList.addEventListener("click", function (evt) {
   }
 });
 
-// BOOKMARK DELETE BTN
-
+// BOOKMARK DELETE BUTTTON ///////////////////////////////////
 bookmarkList.addEventListener("click", function (evt) {
   const isBookmarkDeleteBtn = evt.target.matches(".bookmark__delete-btn-img");
 
@@ -87,39 +89,37 @@ bookmarkList.addEventListener("click", function (evt) {
   }
 });
 
+// Bookmark placement local stroge ////////////////////
 const localBookmarks = JSON.parse(
   window.localStorage.getItem("localBookmarks")
 );
 let bookmarksArr = localBookmarks || [];
 
-// RENDER BOOKS
-
+// RENDER BOOKS ////////////////////////////////////////
 const renderBooks = function (arr, element) {
   element.innerHTML = null;
-
   arr.forEach((item) => {
     const htmlCard = `
-        <li class="card__item">
+      <li class="card__item">
         <div class="card main__card">
-        <div class="card__header">
+          <div class="card__header">
             <img class="card__header-img" src="${item.volumeInfo?.imageLinks.thumbnail}" alt="...">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">${item.volumeInfo?.title}</h3>
-          <p class="card-text mb-1">${item.volumeInfo?.authors}</p>
-          <p class="card-text">${item.volumeInfo?.publishedDate}</p>
-          <div class="card__btns">
-            <button type="button" data-bookmark="${item.id}" class="btn btn-warning btn__bookmark">Bookmark</button>
-            <button type="button" data-bookmark="${item.id}" class="btn btn-info btn__more type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"">More Info</button>
           </div>
-          <a class="btn btn-secondary btn__read w-100" href="${item.volumeInfo?.previewLink}" target="_blank">Read</a>
+          <div class="card-body">
+            <h3 class="card-title">${item.volumeInfo?.title}</h3>
+            <p class="card-text mb-1">${item.volumeInfo?.authors}</p>
+            <p class="card-text">${item.volumeInfo?.publishedDate}</p>
+            <div class="card__btns">
+              <button type="button" data-bookmark="${item.id}" class="btn btn-warning btn__bookmark">Bookmark</button>
+              <button type="button" data-bookmark="${item.id}" class="btn btn-info btn__more type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"">More Info</button>
+            </div>
+            <a class="btn btn-secondary btn__read w-100" href="${item.volumeInfo?.previewLink}"        target="_blank">Read</a>
+          </div>
         </div>
-      </div>
-        </li>
+      </li>
         `;
 
-        // Create Element
-
+    // Create Element Modal ////////////////////////////////
     let newModal = document.createElement("div");
     let newModalHeader = document.createElement("div");
     let newModalHeaderHeading = document.createElement("h5");
@@ -137,8 +137,7 @@ const renderBooks = function (arr, element) {
     let newModalFooter = document.createElement("div");
     let newModalFooterBtn = document.createElement("a");
 
-    // Element Set Atributte
-
+    // Element Set Atributte Modal ////////////////////////////
     newModal.setAttribute("class", "offcanvas offcanvas-end");
     newModal.setAttribute("tabindex", "-1");
     newModal.setAttribute("id", "offcanvasRight");
@@ -166,8 +165,7 @@ const renderBooks = function (arr, element) {
     newModalFooterBtn.setAttribute("target", "_blank");
     newModalFooterBtn.setAttribute("class", "btn btn-secondary");
 
-    // Text Content
-
+    // Text Content Modal /////////////////////////////////////////////
     newModalAutor.textContent = " Author : ";
     newModalPub.textContent = " Published : ";
     newModalPubSher.textContent = " Publishers : ";
@@ -199,8 +197,7 @@ const renderBooks = function (arr, element) {
 
     element.insertAdjacentHTML("beforeend", htmlCard);
 
-    // Append Element
-
+    // Append Element HTML ////////////////////////////////////
     element.appendChild(newModal);
     newModal.appendChild(newModalHeader);
     newModalHeader.appendChild(newModalHeaderHeading);
@@ -217,6 +214,7 @@ const renderBooks = function (arr, element) {
     newModalPubSher.appendChild(newModalPubSherText);
     newModal.appendChild(newModalFooter);
     newModalFooter.appendChild(newModalFooterBtn);
+
   });
 };
 
@@ -230,66 +228,82 @@ const getBooks = async function () {
     totalResult.textContent = data.totalItems;
     mainArr = data.items;
 
+    // Main Function Validator
     if (data.totalItems > 0) {
       renderBooks(data.items, cardList);
     } else {
-      alert("Siz izlagan kitob serverda mavjud emas :(");
+      cardList.innerHTML = null;
+      let newErrTex = document.createElement("p");
+      newErrTex.setAttribute("class", "err-tex text-center text-danger w-100");
+      newErrTex.textContent = "Siz izlagan kitob topilmadi";
+      cardList.appendChild(newErrTex);
     }
 
     let totalResultItems = data.totalItems;
     let totalPageResult = Math.ceil(totalResultItems / 10);
     pagenationList.innerHTML = null;
 
-    for (let i = 1; i <= totalPageResult; i++) {
-      let htmlLi = `<li class="page-item page-link page__btn">${i}</li>`;
+    // Pagenation Page Button /////////////////////
+    for (let i = 0; i <= totalPageResult; i++) {
+      let mainNum = 1 + i;
+      let htmlLi = `<li class="page-item page-link page__btn">${mainNum}</li>`;
 
       if (indexNum == i * 10) {
-        htmlLi = `<li class="page-item page-link active__page">${i}</li>`;
+        htmlLi = `<li class="page-item page-link active__page">${mainNum}</li>`;
       } else {
-        htmlLi = `<li class="page-item page-link">${i}</li>`;
+        htmlLi = `<li class="page-item page-link">${mainNum}</li>`;
       }
 
       pagenationList.insertAdjacentHTML("beforeend", htmlLi);
     }
 
+
     indexNum === 0 ? (elPrevBtn.disabled = true) : (elPrevBtn.disabled = false);
-    indexNum === totalResultItems
+    disabletBtn[1] === totalPageResult
       ? (elNextBtn.disabled = true)
       : (elNextBtn.disabled = false);
   } catch (err) {
-    console.log(err.message);
-    // let imgLink = item.volumeInfo?.imageLinks.thumbnail
-
-    // if(imgLink == undefined) {
-    //   alert("gandon")
-    // }else {
-    //   imgLink = item.volumeInfo?.imageLinks.thumbnail
-    // }
+    cardList.innerHTML = null;
+    // pagenationList.innerHTML = null;
+    let newErrTex = document.createElement("p");
+    newErrTex.setAttribute("class", "err-tex text-center text-danger w-100");
+    newErrTex.textContent = "Bu pageda ma'lumotlar yetarli emas keyigi pagega utishingizni suraymiz";
+    cardList.appendChild(newErrTex);
   }
 };
 
+let disabletBtn = [];
+
+
+// Search Input Value /////////////////////////
 searchInput.addEventListener("change", function (evt) {
   searchInputValue = searchInput.value;
   indexNum = 0;
   getBooks();
 });
 
+// Order Buttton ////////////////////////////
 orderBtn.addEventListener("click", function () {
   searchInputValue = searchInputValue + "=relevance";
   getBooks();
 });
 
+// Prew Button ////////////////////////////
 elPrevBtn.addEventListener("click", () => {
   indexNum = indexNum - 10;
   getBooks();
 });
 
+// Next Button ////////////////////////////
 elNextBtn.addEventListener("click", () => {
   indexNum = indexNum + 10;
   getBooks();
 });
 
+// Pagenation Task //////////////////////////
 pagenationList.addEventListener("click", function (evt) {
-  indexNum = Number(evt.target.textContent * 10);
+  let counter = Number(evt.target.textContent * 10)
+  disabletBtn.push(counter)
+  indexNum = counter;
   getBooks();
 });
