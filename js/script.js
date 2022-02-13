@@ -6,7 +6,12 @@ let searchInput = document.querySelector(".search__input");
 let cardList = document.querySelector(".card__list");
 let totalResult = document.querySelector(".books__total-resul-num");
 let bookmarkList = document.querySelector(".bookmark__list");
+let orderBtn = document.querySelector(".books__order-btn");
+let pagenationList = document.querySelector(".pagenation__list");
+const elPrevBtn = document.querySelector(".prev__btn");
+const elNextBtn = document.querySelector(".next__btn");
 let searchInputValue;
+let indexNum;
 let mainArr;
 
 if (!localToken) {
@@ -77,8 +82,6 @@ bookmarkList.addEventListener("click", function (evt) {
     bookmarksArr.splice(foundBookIndex, 1);
 
     bookmarkList.innerHTML = null;
-
-    bookmarkList.innerHTML = null;
     renderBookmarks(bookmarksArr, bookmarkList);
     window.localStorage.setItem("localBookmarks", JSON.stringify(bookmarksArr));
   }
@@ -115,6 +118,8 @@ const renderBooks = function (arr, element) {
         </li>
         `;
 
+        // Create Element
+
     let newModal = document.createElement("div");
     let newModalHeader = document.createElement("div");
     let newModalHeaderHeading = document.createElement("h5");
@@ -131,6 +136,8 @@ const renderBooks = function (arr, element) {
     let newModalPubSherText = document.createElement("span");
     let newModalFooter = document.createElement("div");
     let newModalFooterBtn = document.createElement("a");
+
+    // Element Set Atributte
 
     newModal.setAttribute("class", "offcanvas offcanvas-end");
     newModal.setAttribute("tabindex", "-1");
@@ -158,6 +165,8 @@ const renderBooks = function (arr, element) {
     newModalFooter.setAttribute("class", "modal__footer");
     newModalFooterBtn.setAttribute("target", "_blank");
     newModalFooterBtn.setAttribute("class", "btn btn-secondary");
+
+    // Text Content
 
     newModalAutor.textContent = " Author : ";
     newModalPub.textContent = " Published : ";
@@ -190,6 +199,8 @@ const renderBooks = function (arr, element) {
 
     element.insertAdjacentHTML("beforeend", htmlCard);
 
+    // Append Element
+
     element.appendChild(newModal);
     newModal.appendChild(newModalHeader);
     newModalHeader.appendChild(newModalHeaderHeading);
@@ -210,17 +221,75 @@ const renderBooks = function (arr, element) {
 };
 
 const getBooks = async function () {
-  const response = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=search+${searchInputValue}`
-  );
+  try {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=search+${searchInputValue}&startIndex=${indexNum}`
+    );
 
-  const data = await response.json();
-  totalResult.textContent = data.totalItems;
-  mainArr = data.items;
-  renderBooks(data.items, cardList);
+    const data = await response.json();
+    totalResult.textContent = data.totalItems;
+    mainArr = data.items;
+
+    if (data.totalItems > 0) {
+      renderBooks(data.items, cardList);
+    } else {
+      alert("Siz izlagan kitob serverda mavjud emas :(");
+    }
+
+    let totalResultItems = data.totalItems;
+    let totalPageResult = Math.ceil(totalResultItems / 10);
+    pagenationList.innerHTML = null;
+
+    for (let i = 1; i <= totalPageResult; i++) {
+      let htmlLi = `<li class="page-item page-link page__btn">${i}</li>`;
+
+      if (indexNum == i * 10) {
+        htmlLi = `<li class="page-item page-link active__page">${i}</li>`;
+      } else {
+        htmlLi = `<li class="page-item page-link">${i}</li>`;
+      }
+
+      pagenationList.insertAdjacentHTML("beforeend", htmlLi);
+    }
+
+    indexNum === 0 ? (elPrevBtn.disabled = true) : (elPrevBtn.disabled = false);
+    indexNum === totalResultItems
+      ? (elNextBtn.disabled = true)
+      : (elNextBtn.disabled = false);
+  } catch (err) {
+    console.log(err.message);
+    // let imgLink = item.volumeInfo?.imageLinks.thumbnail
+
+    // if(imgLink == undefined) {
+    //   alert("gandon")
+    // }else {
+    //   imgLink = item.volumeInfo?.imageLinks.thumbnail
+    // }
+  }
 };
 
 searchInput.addEventListener("change", function (evt) {
   searchInputValue = searchInput.value;
+  indexNum = 0;
+  getBooks();
+});
+
+orderBtn.addEventListener("click", function () {
+  searchInputValue = searchInputValue + "=relevance";
+  getBooks();
+});
+
+elPrevBtn.addEventListener("click", () => {
+  indexNum = indexNum - 10;
+  getBooks();
+});
+
+elNextBtn.addEventListener("click", () => {
+  indexNum = indexNum + 10;
+  getBooks();
+});
+
+pagenationList.addEventListener("click", function (evt) {
+  indexNum = Number(evt.target.textContent * 10);
   getBooks();
 });
