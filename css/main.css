@@ -250,9 +250,11 @@ img {
     font-size: 24px;
     line-height: 28px;
     color: #000000;
+
 }
 
 .main__left-decs {
+  width: 218px;
     padding: 0px;
     margin: 0px 0px 25px;
     font-weight: normal;
@@ -282,9 +284,9 @@ img {
 .bookmark__item-heading {
     padding: 0px;
     margin: 0px 0px 8px;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 19px;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 23px;
     color: #000000;
 }
 
@@ -292,6 +294,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 140px;
 }
 
 .bookmark__item-desc {
@@ -363,4 +366,89 @@ img {
 
 .card__item {
     margin: 11px;
+}
+
+.card__header-img {
+    width: 200px;
+    height: 200px;
+}
+
+.offcanvas offcanvas-end {
+  width: 580px !important;
+}
+
+ .modal__header {
+  background: #F8FAFD;
+  padding: 10px 20px ;
+}
+
+.modal__img {
+  width: 230px;
+  height: 230px;
+  margin-bottom: 24px;
+}
+
+#modal__heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #222531;
+}
+
+ .modal__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 30px;
+}
+
+ .modal__desc {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 170.3%;
+  color: #58667E;
+}
+
+.modal__autor {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height:  30px;
+  color: #222531;
+  margin-bottom: 24px;
+}
+
+.modal__autor-text {
+  padding: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #0D75FF;
+  background: #0D75FF17;
+  border-radius: 30px;
+}
+
+.modal__texts {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modal__footer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  background: #F8FAFD;
+  padding: 10px 20px ;
+}
+
+.bookmark__delete-btn {
+  background-color: transparent;
+  border: none;
+  outline-style: none;
 }
