@@ -71,9 +71,6 @@ img {
 
 /* LOGIN CODES */
 
-.login {
-
-}
 
 .login__main {
   width: 100%;
@@ -348,17 +345,19 @@ img {
 }
 
 .card__list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: max-content;
+  gap: 1rem;
   padding: 0;
   margin: 0;
   list-style: none;
-  margin: -11px;
 }
 
-.card__item {
-  margin: 11px;
+.card__item{
+  height: max-content;
 }
+
 
 .card__header-img {
   width: 200px;
